@@ -1,7 +1,25 @@
-﻿
-@{
-    ViewData["Title"] = "Index";
-}
+﻿@using Student.Models
+@model IEnumerable<Department>
 
-<h1>Index</h1>
-
+<div class="row">
+    <div class="col-md-10 offset-md-2">
+        <table class="table">
+            <tr>
+                <th>Name</th>
+                <th>Location</th>
+                <th>Employee Count</th>
+                <th>操作</th>
+            </tr>
+            @Html.DisplayForModel()  @*使用模板*@
+        </table>
+    </div>
+</div>
+<div class="row">
+    <div class="col-md-2">
+        @await Component.InvokeAsync(name:"CompanySummary",arguments:new { title="部门列表页的汇总"})
+        <vc:company-summary  title="部门列表页的汇总2"></vc:company-summary>
+    </div>
+    <div class="col-md-4">
+        <a asp-action="Add">Add</a>
+    </div>
+</div>

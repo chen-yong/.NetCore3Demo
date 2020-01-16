@@ -14,6 +14,8 @@ namespace Student
 {
     public class Startup
     {
+        // 依赖注入 快捷键：ctor +Tab
+        // 构造函数注入
         public Startup(IConfiguration configuration)
         {
             Configuration = configuration;
@@ -28,6 +30,8 @@ namespace Student
             // 注册服务
             services.AddSingleton<IDepartmentService, DepartmentService>();
             services.AddSingleton<IEmployeeService, EmployeeService>();
+            //映射
+            services.Configure<ThreeOptions>(Configuration.GetSection(key: "Student"));
         }
 
         // This method gets called by the runtime. Use this method to configure the HTTP request pipeline.

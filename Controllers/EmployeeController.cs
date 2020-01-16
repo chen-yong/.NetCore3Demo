@@ -20,17 +20,17 @@ namespace Student.Controllers
         public async Task<IActionResult> Index(int departmentId)
         {
             var department = await _departmentService.GetById(departmentId);
-            ViewBag.Title = $"Employess of {department.Name}";
+            //ViewBag.Title = $"Employees of {department.Name}";
             ViewBag.DepartmentId = departmentId;
             var employees = await _employeeService.GetByDepartmentId(departmentId);
             return View(employees);
         }
-        public IActionResult Add(int deartmentId)
+        public IActionResult Add(int departmentId)
         {
             ViewBag.Title = "Add Employee";
             return View(new Employee
             {
-                DepartmentId = deartmentId
+                DepartmentId = departmentId
             });
         }
         [HttpPost]
@@ -42,7 +42,7 @@ namespace Student.Controllers
             }
             return RedirectToAction(nameof(Index),routeValues:new { departmentId=model.DepartmentId});
         }
-        public async Task<IActionResult> Fire(int  employeeId)
+        public async Task<IActionResult> Fire(int employeeId)
         {
             var employee = await _employeeService.Fire(employeeId);
             return RedirectToAction(nameof(Index), routeValues: new { departmentId = employee.DepartmentId });
